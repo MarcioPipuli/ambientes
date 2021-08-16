@@ -1,0 +1,12 @@
+#DOCKERFILE
+
+    sudo docker build -t ambiente-php . \
+    && \
+    sudo docker run -it --name php \
+        -v /home/mpipuli/Cursos/ambientes/php/projetos:/php \
+        ambiente-php:latest
+
+---------------------------------------------------------------------------------------------
+#DOCKER-COMPOSE
+
+    sudo docker exec -it php /bin/bash

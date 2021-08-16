@@ -1,0 +1,37 @@
+version: "2.2"
+services:
+  DB_mysql:
+    image: mysql
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - /home/pipuli/Cursos/ambientes/database:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    tty: true
+
+  ambiente-php:
+    build: ./php
+    container_name: php
+    working_dir: "/php"
+    volumes:
+      - /home/pipuli/Cursos/ambientes/php/projetos:/php
+    tty: true
+    depends_on: 
+      - DB_mysql
+    links: 
+      - DB_mysql
+    
+  ambiente-nodejs:
+    build: ./nodejs
+    container_name: nodejs
+    working_dir: "/nodejs"
+    volumes:
+      - /home/pipuli/Cursos/ambientes/nodejs/projetos:/nodejs
+    tty: true
+    depends_on: 
+      - DB_mysql
+    links: 
+      - DB_mysql
+
